@@ -1,0 +1,7 @@
+<ion-slide *ngFor="let product of featuredProducts">
+    <ion-col class="ion-text-left" routerLink="/item-details" routerDirection="forward">
+        <img src="{{ iem.image }}" />
+        <p>${{ iem.price }}</p>
+        <h6>{{ iem.name }}</h6>
+    </ion-col>
+</ion-slide>

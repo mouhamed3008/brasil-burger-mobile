@@ -1,0 +1,14 @@
+<div class="card" routerLink="/item-details">
+    <ion-img [src]="item.image" [src]="'data:image/png;base64,' + item.image" class="img-bg" style="border-radius:10px ;"></ion-img>
+
+    <div class="card-content">
+        <h3 class="title">{{item.libelle}}</h3>
+        <h2 class="subtitle"><sup>$</sup>{{item.prix|number:'1.2'}}</h2>
+
+        <ion-buttons slot="start">
+            <ion-button>
+                <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<!-- eslint-disable @angular-eslint/template/eqeqeq -->
+<ion-header parallax imageUrl="https://picsum.photos/350" height="290" bgPosition="top">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button>
+                <ion-icon name="menu-outline"></ion-icon>
+            </ion-menu-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button class="notification">
+                <ion-icon name="notifications-outline" color="dark"></ion-icon>
+                <span>&nbsp;</span>
+            </ion-button>
+            <ion-button class="filter">
+                <ion-icon name="funnel-outline" color="dark"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+
+    <div class="title ion-padding">
+        <h2>Categories</h2>
+        <p>See all</p>
+    </div>
+
+    <div class="category-slider ion-padding-start">
+        <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+            <ion-slide *ngFor="let category of categories">
+                <ion-col>
+                    <h4 style="opacity:1">{{ category.name }}</h4>
+                    <img src="{{ category.image }}" style="opacity:0.6" />
+                </ion-col>
+            </ion-slide>
+        </ion-slides>
+    </div>
+    <div class="seperator">
+        <hr>
+    </div>
+
+    <ion-segment style="margin-top: 2.5rem;" (ionChange)="segmentChanged($event)" value="card" scrollable>
+        <ion-segment-button value="card">
+            <ion-icon name="apps-outline"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="list">
+            <ion-icon name="list-outline"></ion-icon>
+        </ion-segment-button>
+
+    </ion-segment>
+    <div *ngIf="segment === 'card'">
+        <h6 class="list-header">
+            Nos Menus
+        </h6>
+        <div class="food-list" class="animate__animated animate__slideInUp animate__fast" scrollable>
+            <app-item-card *ngFor="let food of productsMenu" [item]="food"></app-item-card>
+        </div>
+
+        <h4 class="list-header">Nos Burgers</h4>
+        <div class="food-list" class="animate__animated animate__slideInUp animate__fast" scrollable>
+            <app-item-card *ngFor="let food of productsBurger" [item]="food"></app-item-card>
+        </div>
+    </div>
+
+
+    <div *ngIf="segment === 'list'">
+        <h6 class="list-header">
+            Nos Menus
+        </h6>
+        <div class="food-list" class="animate__animated animate__slideInUp animate__fast">
+            <app-item-list *ngFor="let food of featuredProducts" [item]="food"></app-item-list>
+        </div>
+
+        <h4 class="list-header">Nos Burgers</h4>
+        <div class="food-list" class="animate__animated animate__slideInUp animate__fast">
+            <app-item-list *ngFor="let food of featuredProducts" [item]="food"></app-item-list>
+
+        </div>
+    </div>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+
+</ion-content>
